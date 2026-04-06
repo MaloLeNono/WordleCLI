@@ -1,4 +1,5 @@
 ﻿using Spectre.Console;
+using WordleCLI.Enum;
 
 namespace WordleCLI;
 
@@ -29,8 +30,6 @@ public class Game
         AnsiConsole.Write(new Rule());
         
         if (_word is null) return;
-
-        Dictionary<char, int> remainingOccurrences = GetLetterOccurences(_word);
         
         string guess = string.Empty;
 
@@ -52,27 +51,35 @@ public class Game
             
             AnsiConsole.WriteLine();
 
-            string[] letterColors = Enumerable.Repeat(Color.Grey.ToMarkup(), 5).ToArray();
+            Dictionary<char, int> remainingOccurrences = GetLetterOccurrences(_word);
+            LetterState[] letterStates = Enumerable.Repeat(LetterState.Incorrect, 5).ToArray();
             for (int i = 0; i < guess.Length; i++)
             {
                 char c = guess[i];
                 if (c != _word[i]) continue;
-                letterColors[i] = Color.Green.ToMarkup();
+                letterStates[i] = LetterState.Correct;
                 remainingOccurrences[c]--;
             }
 
             for (int i = 0; i < guess.Length; i++)
             {
-                if (letterColors[i] == Color.Green.ToMarkup()) continue;
+                if (letterStates[i] == LetterState.Correct) continue;
                 char c = guess[i];
                 if (!remainingOccurrences.TryGetValue(c, out int value) || value <= 0) continue;
-                letterColors[i] = Color.Gold3_1.ToMarkup();
+                letterStates[i] = LetterState.WrongPosition;
                 remainingOccurrences[c] = --value;
             }
 
             for (int i = 0; i < guess.Length; i++)
             {
-                AnsiConsole.Markup($"[white on {letterColors[i]}] {guess[i]} [/]");
+                string colour = letterStates[i] switch
+                {
+                    LetterState.Correct => Color.Green.ToMarkup(),
+                    LetterState.WrongPosition => Color.Gold3_1.ToMarkup(),
+                    LetterState.Incorrect => Color.Gray.ToMarkup(),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+                AnsiConsole.Markup($"[white on {colour}] {guess[i]} [/]");
                 Thread.Sleep(250);
             }
             
@@ -93,7 +100,7 @@ public class Game
         Console.ReadKey();
     }
 
-    private static Dictionary<char, int> GetLetterOccurences(string word)
+    private static Dictionary<char, int> GetLetterOccurrences(string word)
     {
         Dictionary<char, int> letterOccurences = new();
 

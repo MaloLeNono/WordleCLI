@@ -19,6 +19,15 @@ public class Game
     
     public void Start()
     {
+        AnsiConsole.Write(
+            new FigletText("WordleCLI")
+                .LeftJustified()
+                .Color(Color.Yellow)
+        );
+        
+        AnsiConsole.MarkupLine("[yellow]v1.0.0 - by Malo[/]");
+        AnsiConsole.Write(new Rule());
+        
         if (_word is null) return;
 
         Dictionary<char, int> remainingOccurrences = GetLetterOccurences(_word);
@@ -27,19 +36,21 @@ public class Game
 
         for (int attempt = 1; attempt <= Attempts; attempt++)
         {
-            AnsiConsole.WriteLine($"Attempt {attempt} ({Attempts - attempt} left):");
+            AnsiConsole.MarkupLine($"\n[bold white on gray11]Attempt {attempt} ({Attempts - attempt} left):[/]\n");
 
             guess = AnsiConsole.Prompt(
-                new TextPrompt<string>("Guess:")
+                new TextPrompt<string>("[green]>[/]")
                     .Validate(x =>
                     {
-                        if (x.Length != 5) return ValidationResult.Error("[red]You need to type 5 letters.[/]");
-                        if (!x.All(char.IsLetter)) return ValidationResult.Error("[red]You can only type letters.[/]");
+                        if (x.Length != 5) return ValidationResult.Error("[white on red]You need to type 5 letters.[/]");
+                        if (!x.All(char.IsLetter)) return ValidationResult.Error("[white on red]You can only type letters.[/]");
                         return !_apiHandler.WordExists(x).GetAwaiter().GetResult() 
-                            ? ValidationResult.Error("[red]This word does not exist.[/]") 
+                            ? ValidationResult.Error("[white on red]This word does not exist.[/]") 
                             : ValidationResult.Success();
                     })
             ).ToUpper();
+            
+            AnsiConsole.WriteLine();
 
             string[] letterColors = Enumerable.Repeat(Color.Grey.ToMarkup(), 5).ToArray();
             for (int i = 0; i < guess.Length; i++)
@@ -67,14 +78,15 @@ public class Game
             
             
             AnsiConsole.WriteLine("\n");
+            AnsiConsole.Write(new Rule());
             
             if (guess == _word)
                 break;
         }
 
-        AnsiConsole.WriteLine(guess != _word
-            ? $"Nice try. The word was {_word}."
-            : $"Congrats! The word was {_word}."
+        AnsiConsole.MarkupLine(guess != _word
+            ? $"Nice try. The word was [yellow]{_word}[/]."
+            : $"Congrats! The word was [yellow]{_word}[/]."
         );
 
         AnsiConsole.WriteLine("\nPress any key to exit...");

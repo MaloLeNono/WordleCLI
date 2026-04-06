@@ -20,6 +20,8 @@ public class Game
     public void Start()
     {
         if (_word is null) return;
+
+        Dictionary<char, int> remainingOccurrences = GetLetterOccurences(_word);
         
         string guess = string.Empty;
 
@@ -39,19 +41,30 @@ public class Game
                     })
             ).ToUpper();
 
+            string[] letterColors = Enumerable.Repeat(Color.Grey.ToMarkup(), 5).ToArray();
             for (int i = 0; i < guess.Length; i++)
             {
-                string letterColor;
-                if (guess[i] == _word[i])
-                    letterColor = Color.Green.ToMarkup();
-                else if (_word.Contains(guess[i]))
-                    letterColor = Color.Gold3_1.ToMarkup();
-                else
-                    letterColor = Color.Grey.ToMarkup();
+                char c = guess[i];
+                if (c != _word[i]) continue;
+                letterColors[i] = Color.Green.ToMarkup();
+                remainingOccurrences[c]--;
+            }
 
-                AnsiConsole.Markup($"[white on {letterColor}] {guess[i]} [/]");
+            for (int i = 0; i < guess.Length; i++)
+            {
+                if (letterColors[i] == Color.Green.ToMarkup()) continue;
+                char c = guess[i];
+                if (!remainingOccurrences.TryGetValue(c, out int value) || value <= 0) continue;
+                letterColors[i] = Color.Gold3_1.ToMarkup();
+                remainingOccurrences[c] = --value;
+            }
+
+            for (int i = 0; i < guess.Length; i++)
+            {
+                AnsiConsole.Markup($"[white on {letterColors[i]}] {guess[i]} [/]");
                 Thread.Sleep(250);
             }
+            
             
             AnsiConsole.WriteLine("\n");
             
@@ -66,6 +79,21 @@ public class Game
 
         AnsiConsole.WriteLine("\nPress any key to exit...");
         Console.ReadKey();
+    }
+
+    private static Dictionary<char, int> GetLetterOccurences(string word)
+    {
+        Dictionary<char, int> letterOccurences = new();
+
+        foreach (char c in word)
+        {
+            if (letterOccurences.TryGetValue(c, out int value))
+                letterOccurences[c] = ++value;
+            else
+                letterOccurences.TryAdd(c, 1);
+        }
+
+        return letterOccurences;
     }
 
     private async Task InitializeWordAsync() => _word = await _apiHandler.GetWord();

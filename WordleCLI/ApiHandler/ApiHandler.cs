@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace WordleCLI;
+namespace WordleCLI.ApiHandler;
 
 public class ApiHandler : IApiHandler
 {

@@ -45,7 +45,7 @@ public class Game
                 if (guess[i] == _word[i])
                     letterColor = Color.Green.ToMarkup();
                 else if (_word.Contains(guess[i]))
-                    letterColor = Color.Yellow.ToMarkup();
+                    letterColor = Color.Gold3_1.ToMarkup();
                 else
                     letterColor = Color.Grey.ToMarkup();
 
@@ -63,6 +63,9 @@ public class Game
             ? $"Nice try. The word was {_word}."
             : $"Congrats! The word was {_word}."
         );
+
+        AnsiConsole.WriteLine("\nPress any key to exit...");
+        Console.ReadKey();
     }
 
     private async Task InitializeWordAsync() => _word = await _apiHandler.GetWord();

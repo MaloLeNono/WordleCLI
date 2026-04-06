@@ -26,7 +26,7 @@ public class Game
                 .Color(Color.Yellow)
         );
         
-        AnsiConsole.MarkupLine("[yellow]v1.0.0 - by Malo[/]");
+        AnsiConsole.MarkupLine("[yellow]v1.0.1 - by Malo[/]");
         AnsiConsole.Write(new Rule());
         
         if (_word is null) return;

@@ -26,10 +26,10 @@ public class Game
                 .Color(Color.Yellow)
         );
         
-        AnsiConsole.MarkupLine("[yellow]v1.0.1 - by Malo[/]");
+        AnsiConsole.MarkupLine("[yellow]v1.0.2 - by Malo[/]");
         AnsiConsole.Write(new Rule());
-        
-        if (_word is null) return;
+
+        if (_word is null) throw new NullReferenceException("Error! No word was loaded.");
         
         string guess = string.Empty;
 

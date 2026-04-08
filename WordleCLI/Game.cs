@@ -1,4 +1,5 @@
 ﻿using Spectre.Console;
+using WordleCLI.ApiHandler;
 using WordleCLI.Enum;
 
 namespace WordleCLI;

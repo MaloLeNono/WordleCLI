@@ -1,4 +1,4 @@
-﻿namespace WordleCLI;
+﻿namespace WordleCLI.ApiHandler;
 
 public interface IApiHandler
 {

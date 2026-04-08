@@ -10,8 +10,7 @@ public class ApiHandler : IApiHandler
     
     public async Task<string> GetWord()
     {
-        DateTime now = DateTime.Now;
-        string fullUrl = $"{WordUrl}/{now:yyyy-MM-dd}.json";
+        string fullUrl = $"{WordUrl}/{DateTime.Now.ToShortDateString()}.json";
         string json = await Client.GetStringAsync(fullUrl);
         var responseModel = new { solution = "" };
         var response = JsonConvert.DeserializeAnonymousType(json, responseModel);

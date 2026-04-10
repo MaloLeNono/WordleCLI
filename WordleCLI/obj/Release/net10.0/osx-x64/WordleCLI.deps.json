@@ -1,0 +1,76 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0/osx-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {},
+    ".NETCoreApp,Version=v10.0/osx-x64": {
+      "WordleCLI/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.5-beta1",
+          "Spectre.Console": "0.55.1-alpha.0.5"
+        },
+        "runtime": {
+          "WordleCLI.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.5-beta1": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.5.31230"
+          }
+        }
+      },
+      "Spectre.Console/0.55.1-alpha.0.5": {
+        "dependencies": {
+          "Spectre.Console.Ansi": "0.55.1-alpha.0.5"
+        },
+        "runtime": {
+          "lib/net10.0/Spectre.Console.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.55.1.0"
+          }
+        }
+      },
+      "Spectre.Console.Ansi/0.55.1-alpha.0.5": {
+        "runtime": {
+          "lib/net10.0/Spectre.Console.Ansi.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.55.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WordleCLI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.5-beta1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cGxikAY78u8CPfIT7mkICvI2ZNL7oDsC+DzgVWxtU5DmNhF2qDcU3YheDitdO9TKIra6Y5rHRD2T7oEexbAbLA==",
+      "path": "newtonsoft.json/13.0.5-beta1",
+      "hashPath": "newtonsoft.json.13.0.5-beta1.nupkg.sha512"
+    },
+    "Spectre.Console/0.55.1-alpha.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mIIla12azVLSbrOa94l5aIP2Z17ABY88d2wJLu5Jrx4gJTSFZhLURyNenvXU6LLhkB+0OQ+DeaP6lD7CwMr+3g==",
+      "path": "spectre.console/0.55.1-alpha.0.5",
+      "hashPath": "spectre.console.0.55.1-alpha.0.5.nupkg.sha512"
+    },
+    "Spectre.Console.Ansi/0.55.1-alpha.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EuUuYnexG0UuQ/JuElqczpNCXEozzA1PU9SqSUJJif2Ll8OsDeR2VE2x3JKhOXAtGT/XUECo9TNI3o+6s1SgyQ==",
+      "path": "spectre.console.ansi/0.55.1-alpha.0.5",
+      "hashPath": "spectre.console.ansi.0.55.1-alpha.0.5.nupkg.sha512"
+    }
+  }
+}

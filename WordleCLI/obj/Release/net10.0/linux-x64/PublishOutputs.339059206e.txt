@@ -1,0 +1,2 @@
+C:\Users\malog\RiderProjects\WordleCLI\WordleCLI\bin\Release\net10.0\linux-x64\publish\WordleCLI.pdb
+C:\Users\malog\RiderProjects\WordleCLI\WordleCLI\bin\Release\net10.0\linux-x64\publish\WordleCLI
